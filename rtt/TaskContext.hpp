@@ -566,7 +566,7 @@ namespace RTT
          * @param name The port name
          * @return a pointer to a port or null if it does not exist.
          */
-        base::PortInterface* getPort(const std::string& name) const {
+        virtual base::PortInterface* getPort(const std::string& name) const {
             return ports()->getPort(name);
         }
 

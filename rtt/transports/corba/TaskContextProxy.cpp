@@ -471,6 +471,20 @@ namespace RTT
         return 0;
     }
 
+    base::PortInterface* TaskContextProxy::getPort(const string& name) const
+    {
+        base::PortInterface* ret = RTT::TaskContext::getPort(name);
+        if(ret)
+            return ret;
+        
+        //port may be added between last sync and now
+        TaskContextProxy *nonConst = const_cast<TaskContextProxy *>(this);
+        nonConst->synchronize();
+        
+        return RTT::TaskContext::getPort(name);
+    }
+
+    
     bool TaskContextProxy::start() {
         try {
             if (! CORBA::is_nil(mtask) )

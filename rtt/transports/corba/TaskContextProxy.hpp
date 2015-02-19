@@ -175,6 +175,8 @@ namespace RTT
          */
         corba::CTaskContext_ptr server() const;
 
+        virtual base::PortInterface* getPort(const std::string& name) const;
+        
         virtual bool activate();
 
         virtual bool start();
